@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Furmuzachi | cento.red</title>
+    
+    <meta property="og:title" content="Gabriel Furmuzachi">
+    <meta property="og:description" content="Creative Professional | Web Dev • Design • Philosophy • Fiction">
+    <meta property="og:image" content="https://dev.cento.red/img/gabriel_furmuzachi.webp">
+    <meta property="og:url" content="https://cento.red/vcard/g/">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --accent: #000000;
+            --subtle: #666;
+        }
+        body { 
+            font-family: "Inter", -apple-system, system-ui, sans-serif; 
+            background: #f4f4f4; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; 
+        }
+        .container { 
+            background: var(--bg); width: 100%; max-width: 340px; padding: 40px 20px; 
+            border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center;
+        }
+        .profile-img {
+            width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+            margin-bottom: 15px; border: 2px solid #eee;
+        }
+        h1 { font-size: 1.4rem; margin: 0; font-weight: 700; }
+        .title { color: var(--subtle); font-size: 0.9rem; margin: 5px 0 20px; letter-spacing: 0.5px; }
+        
+        #qrcode { 
+            margin: 20px auto; display: inline-block; padding: 12px; 
+            background: white; border: 1px solid #eee; border-radius: 16px; 
+        }
+
+        .actions { margin-top: 25px; display: flex; flex-direction: column; gap: 10px; padding: 0 20px; }
+        .btn { 
+            padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .btn-main { background: var(--text); color: white; }
+        .btn-sub { background: #f0f0f0; color: var(--text); }
+        .btn:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://dev.cento.red/img/gabriel_furmuzachi.webp" alt="Gabriel Furmuzachi" class="profile-img">
+    <h1>Gabriel Furmuzachi</h1>
+    <p class="title">Creative Professional</p>
+    
+    <div id="qrcode"></div>
+
+    <div class="actions">
+        <a href="#" class="btn btn-main" onclick="downloadVCard()">Add to Contacts</a>
+        <a href="https://cento.red" class="btn btn-sub">cento.red</a>
+        <a href="mailto:gabriel@cento.red" class="btn btn-sub">Email Me</a>
+    </div>
+</div>
+
+<script>
+    const cardUrl = "https://cento.red/vcard/g/";
+
+    // Initialize QR Code
+    new QRCode(document.getElementById("qrcode"), {
+        text: cardUrl,
+        width: 160,
+        height: 160,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    // Dynamic vCard Generation
+    function downloadVCard() {
+        const vcardData = [
+            "BEGIN:VCARD",
+            "VERSION:3.0",
+            "N:Furmuzachi;Gabriel;;;",
+            "FN:Gabriel Furmuzachi",
+            "ORG:cento.red;",
+            "TITLE:Creative Professional",
+            "TEL;TYPE=CELL:+4306706516595",
+            "EMAIL:gabriel@cento.red",
+            "URL:https://cento.red",
+            "PHOTO;VALUE=URI:https://dev.cento.red/img/gabriel_furmuzachi.webp",
+            "NOTE:Met via QR business card at " + cardUrl,
+            "END:VCARD"
+        ].join("\n");
+        
+        const blob = new Blob([vcardData], { type: "text/vcard" });
+        const link = document.createElement('a');
+        link.download = "Gabriel_Furmuzachi.vcf";
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
+    }
+</script>
+
+</body>
+</html>
