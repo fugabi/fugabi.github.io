@@ -68,17 +68,15 @@
 <script>
     const cardUrl = "https://cento.red/vcard/g/";
 
-    // Initialize QR Code
+    // 1. Initialize QR Code (remains the same)
     new QRCode(document.getElementById("qrcode"), {
         text: cardUrl,
-        width: 160,
-        height: 160,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
+        width: 160, height: 160,
+        colorDark : "#000000", colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
     });
 
-    // Dynamic vCard Generation
+    // 2. The vCard Function
     function downloadVCard() {
         const vcardData = [
             "BEGIN:VCARD",
@@ -101,6 +99,16 @@
         link.href = window.URL.createObjectURL(blob);
         link.click();
     }
+
+    // 3. AUTO-TRIGGER LOGIC
+    // This attempts to trigger the download 1 second after the page loads
+    window.onload = () => {
+        setTimeout(() => {
+            // Note: This may be blocked by Safari/Chrome mobile 
+            // if it's the very first time visiting the domain.
+            downloadVCard();
+        }, 1000); 
+    };
 </script>
 
 </body>
