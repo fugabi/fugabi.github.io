@@ -14,38 +14,97 @@
     
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #1a1a1a;
-            --accent: #000000;
-            --subtle: #666;
+            /* Colors derived from the 'Digital Garden' palette */
+            --bg-deep: #2c3e50;
+            --card-bg: #34495e;
+            --text-light: #ecf0f1;
+            --accent-coral: #e74c3c; /* The reddish-orange from your screenshots */
+            --subtle-text: #bdc3c7;
         }
+        
         body { 
             font-family: "Inter", -apple-system, system-ui, sans-serif; 
-            background: #f4f4f4; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; 
-        }
-        .container { 
-            background: var(--bg); width: 100%; max-width: 340px; padding: 40px 20px; 
-            border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center;
-        }
-        .profile-img {
-            width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
-            margin-bottom: 15px; border: 2px solid #eee;
-        }
-        h1 { font-size: 1.4rem; margin: 0; font-weight: 700; }
-        .title { color: var(--subtle); font-size: 0.9rem; margin: 5px 0 20px; letter-spacing: 0.5px; }
-        
-        #qrcode { 
-            margin: 20px auto; display: inline-block; padding: 12px; 
-            background: white; border: 1px solid #eee; border-radius: 16px; 
+            background: var(--bg-deep); 
+            margin: 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            color: var(--text-light);
         }
 
-        .actions { margin-top: 25px; display: flex; flex-direction: column; gap: 10px; padding: 0 20px; }
-        .btn { 
-            padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            transition: all 0.2s ease;
+        .container { 
+            background: var(--card-bg); 
+            width: 100%; 
+            max-width: 340px; 
+            padding: 40px 20px; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); 
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .btn-main { background: var(--text); color: white; }
-        .btn-sub { background: #f0f0f0; color: var(--text); }
+
+        .profile-img {
+            width: 110px; height: 110px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            margin-bottom: 20px; 
+            border: 3px solid var(--accent-coral);
+            padding: 3px;
+            background: var(--card-bg);
+        }
+
+        h1 { font-size: 1.6rem; margin: 0; font-weight: 700; letter-spacing: -0.5px; }
+        
+        .title { 
+            color: var(--subtle-text); 
+            font-size: 0.95rem; 
+            margin: 8px 0 25px; 
+            font-weight: 300;
+        }
+        
+        #qrcode { 
+            margin: 10px auto; 
+            display: inline-block; 
+            padding: 12px; 
+            background: white; 
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .actions { 
+            margin-top: 30px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            padding: 0 15px; 
+        }
+
+        .btn { 
+            padding: 14px; 
+            border-radius: 12px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-main { 
+            background: var(--accent-coral); 
+            color: white; 
+        }
+
+        .btn-sub { 
+            background: rgba(255,255,255,0.05); 
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
         .btn:active { transform: scale(0.98); }
     </style>
 </head>
@@ -68,15 +127,17 @@
 <script>
     const cardUrl = "https://cento.red/vcard/g/";
 
-    // 1. Initialize QR Code (remains the same)
+    // Initialize QR Code
     new QRCode(document.getElementById("qrcode"), {
         text: cardUrl,
-        width: 160, height: 160,
-        colorDark : "#000000", colorLight : "#ffffff",
+        width: 160,
+        height: 160,
+        colorDark : "#2c3e50",
+        colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
     });
 
-    // 2. The vCard Function
+    // vCard Download Function
     function downloadVCard() {
         const vcardData = [
             "BEGIN:VCARD",
@@ -98,16 +159,6 @@
         link.href = window.URL.createObjectURL(blob);
         link.click();
     }
-
-    // 3. AUTO-TRIGGER LOGIC
-    // This attempts to trigger the download 1 second after the page loads
-    window.onload = () => {
-        setTimeout(() => {
-            // Note: This may be blocked by Safari/Chrome mobile 
-            // if it's the very first time visiting the domain.
-            downloadVCard();
-        }, 1000); 
-    };
 </script>
 
 </body>
