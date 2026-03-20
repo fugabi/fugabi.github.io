@@ -6,11 +6,12 @@ body {
     place-items: center;
     font-family: 'Raleway', Arial, sans-serif;
     font-size: clamp(1.25rem, 1rem + 2vw, 2rem);
-    background: #92c7d6;
+    /* background: #92c7d6;
     background-image: -webkit-radial-gradient(top, circle cover, #97d0e1, #427388 80%);
     background-image: -moz-radial-gradient(top, circle cover, #97d0e1, #427388 80%);
     background-image: -o-radial-gradient(top, circle cover, #97d0e1, #427388 80%);
-    background-image: radial-gradient(top, circle cover, #97d0e1, #427388 80%);
+    background-image: radial-gradient(top, circle cover, #97d0e1, #427388 80%); */
+    background-image: linear-gradient(to right bottom, #fefefe, #e8e8f0, #d2d2e2, #babed5, #a1aac8, #989cc5, #938dc1, #917dba, #ad67ab, #c74c8c, #d42f5e, #cf2626);
   }
 
 
